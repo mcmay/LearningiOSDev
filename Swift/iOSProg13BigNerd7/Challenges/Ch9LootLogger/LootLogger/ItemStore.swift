@@ -15,7 +15,7 @@ class ItemStore {
      }
     }
     var sectionsSorted: [(header: String, items: [Item])] { sections.sorted {
-        return $0.items.first!.dateCreated < $1.items.first!.dateCreated
+        return $0.items.first!.valueInDollars <= $1.items.first!.valueInDollars
         }
     }
     

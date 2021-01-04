@@ -1,6 +1,15 @@
 // 
 //  Copyright © 2020 Big Nerd Ranch
 //
+/*
+ * “Bronze Challenge: Sections
+ * Have the UITableView display two sections – one for items worth more than $50 and one for the rest. Before you
+ * start this challenge, make sure you copy the folder containing the project and all its source files in Finder.
+ * Then tackle the challenge in the copied project; you will need the original to build on in the following
+ * chapters.”
+ *
+ * Excerpt From: Aaron Hillegass. “iOS Programming: The Big Nerd Ranch Guide, 7th Edition.” Apple Books.
+ */
 
 import UIKit
 
