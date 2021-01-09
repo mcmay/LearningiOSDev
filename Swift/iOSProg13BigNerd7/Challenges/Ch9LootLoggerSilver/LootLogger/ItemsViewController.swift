@@ -15,13 +15,13 @@ class ItemsViewController: UITableViewController {
     
     var itemStore: ItemStore!
     var sections: [(header: String, items: [Item])] = [(header: "Less than $50",
-                                                        items: [Item(name: "No items!", serialNumber: nil, valueInDollars: 0)]),
+                                                        items: [Item(name: "No items!", serialNumber: "no number", valueInDollars: 0)]),
                                                        (header: "$50 and above",
-                                                        items: [Item(name: "No items!", serialNumber: nil, valueInDollars: 60)])]
+                                                        items: [Item(name: "No items!", serialNumber: "no number", valueInDollars: 60)])]
     let sects: [(header: String, items: [Item])] = [(header: "Less than $50",
-                                                        items: [Item(name: "No items!", serialNumber: nil, valueInDollars: 0)]),
+                                                        items: [Item(name: "No items!", serialNumber: "no number", valueInDollars: 0)]),
                                                        (header: "$50 and above",
-                                                        items: [Item(name: "No items!", serialNumber: nil, valueInDollars: 60)])]
+                                                        items: [Item(name: "No items!", serialNumber: "no number", valueInDollars: 60)])]
     var newItemAdded = false
     var idx = -1
     
@@ -52,19 +52,10 @@ class ItemsViewController: UITableViewController {
         let newItem = itemStore.createItem()
         
         sections = itemStore.sectionsSorted
-        print(sections)
         let index = sections.firstIndex{ $0.items.contains(newItem) }
         // Figure out where that item is in the array
         // (Note: You will have an error on the next line; you will fix it soon)
         
-        if let i = itemStore.allItems.firstIndex (of: sects[0].items[0]), index == 0 {
-            print("swapped: i---\(i)")
-            itemStore.allItems[i] = newItem
-        }
-        if let j = itemStore.allItems.firstIndex(of: sects[1].items[0]), index == 1 {
-            print("swaped: j---\(j)")
-            itemStore.allItems[j] = newItem
-        }
         if tableView.numberOfSections < 2 && idx != index! {
             idx = index!
             tableView.insertSections(IndexSet(integer: tableView.numberOfSections), with: .automatic)
@@ -76,6 +67,18 @@ class ItemsViewController: UITableViewController {
                 // Insert this new row into the table
                 tableView.insertRows(at: [indexPath], with: .automatic)
             }
+        }
+        if let _ = itemStore.allItems.firstIndex (of: sects[0].items[0]), index == 0 {
+            //itemStore.allItems[i] = newItem
+            //itemStore.allItems.remove(at: i)
+            self.tableView(self.tableView, commit: UITableViewCell.EditingStyle.delete, forRowAt: IndexPath(row: 0, section: 0))
+            sections = itemStore.sectionsSorted
+        }
+        if let _ = itemStore.allItems.firstIndex(of: sects[1].items[0]), index == 1 {
+            //itemStore.allItems[j] = newItem
+            //itemStore.allItems.remove(at: j)
+            self.tableView(self.tableView, commit: UITableViewCell.EditingStyle.delete, forRowAt: IndexPath(row: 0, section: 1))
+            sections = itemStore.sectionsSorted
         }
     }
     
@@ -99,7 +102,7 @@ class ItemsViewController: UITableViewController {
         let item = section.items[indexPath.row]
         
         cell.textLabel?.text = item.name
-        cell.detailTextLabel?.text = "$\(item.valueInDollars)"
+        cell.detailTextLabel?.text = newItemAdded ? "$\(item.valueInDollars)" : "no price"
 
         return cell
     }
@@ -108,15 +111,17 @@ class ItemsViewController: UITableViewController {
                             commit editingStyle: UITableViewCell.EditingStyle,
                             forRowAt indexPath: IndexPath) {
         // If the table view is asking to commit a delete command...
-        if editingStyle == .delete && indexPath.row != 0 {
+        if editingStyle == .delete {
             let item = sections[indexPath.section].items[indexPath.row]
-            // Remove the item from the store
-            itemStore.removeItem(item)
-            sections[indexPath.section].items.remove(at: indexPath.row)
             
-            // Also remove that row from the table view with an animation
-            tableView.deleteRows(at: [indexPath], with: .automatic)
-            
+            if newItemAdded {
+                // Remove the item from the store
+                itemStore.removeItem(item)
+                sections[indexPath.section].items.remove(at: indexPath.row)
+                
+                // Also remove that row from the table view with an animation
+                tableView.deleteRows(at: [indexPath], with: .automatic)
+            }
             if sections[indexPath.section].items.count == 0 {
                 sections.remove(at: indexPath.section)
                 tableView.deleteSections(IndexSet(integer: indexPath.section), with: .automatic)
