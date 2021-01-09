@@ -112,11 +112,10 @@ class ItemsViewController: UITableViewController {
                             forRowAt indexPath: IndexPath) {
         // If the table view is asking to commit a delete command...
         if editingStyle == .delete {
-            let item = sections[indexPath.section].items[indexPath.row]
             
             if newItemAdded {
                 // Remove the item from the store
-                itemStore.removeItem(item)
+                itemStore.removeItem(sections[indexPath.section].items[indexPath.row])
                 sections[indexPath.section].items.remove(at: indexPath.row)
                 
                 // Also remove that row from the table view with an animation
