@@ -68,16 +68,10 @@ class ItemsViewController: UITableViewController {
                 tableView.insertRows(at: [indexPath], with: .automatic)
             }
         }
-        if let _ = itemStore.allItems.firstIndex (of: sects[0].items[0]), index == 0 {
+        if let _ = itemStore.allItems.firstIndex (of: sects[index!].items[0]) {
             //itemStore.allItems[i] = newItem
             //itemStore.allItems.remove(at: i)
-            self.tableView(self.tableView, commit: UITableViewCell.EditingStyle.delete, forRowAt: IndexPath(row: 0, section: 0))
-            sections = itemStore.sectionsSorted
-        }
-        if let _ = itemStore.allItems.firstIndex(of: sects[1].items[0]), index == 1 {
-            //itemStore.allItems[j] = newItem
-            //itemStore.allItems.remove(at: j)
-            self.tableView(self.tableView, commit: UITableViewCell.EditingStyle.delete, forRowAt: IndexPath(row: 0, section: 1))
+            self.tableView(self.tableView, commit: UITableViewCell.EditingStyle.delete, forRowAt: IndexPath(row: 0, section: index!))
             sections = itemStore.sectionsSorted
         }
     }
@@ -90,6 +84,9 @@ class ItemsViewController: UITableViewController {
     }
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
             return sections[section].header
+    }
+    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return (newItemAdded && indexPath.row == 0)
     }
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         // Get a new or recycled cell
@@ -113,14 +110,14 @@ class ItemsViewController: UITableViewController {
         // If the table view is asking to commit a delete command...
         if editingStyle == .delete {
             
-            if newItemAdded {
+            //if newItemAdded {
                 // Remove the item from the store
                 itemStore.removeItem(sections[indexPath.section].items[indexPath.row])
                 sections[indexPath.section].items.remove(at: indexPath.row)
                 
                 // Also remove that row from the table view with an animation
                 tableView.deleteRows(at: [indexPath], with: .automatic)
-            }
+            //}
             if sections[indexPath.section].items.count == 0 {
                 sections.remove(at: indexPath.section)
                 tableView.deleteSections(IndexSet(integer: indexPath.section), with: .automatic)
