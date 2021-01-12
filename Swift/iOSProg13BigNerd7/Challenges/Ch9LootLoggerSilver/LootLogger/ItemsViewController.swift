@@ -86,7 +86,8 @@ class ItemsViewController: UITableViewController {
             return sections[section].header
     }
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        return (newItemAdded && indexPath.row == 0)
+        //return (newItemAdded && indexPath.row == 0) // indexPath.row == 0 is not only unnecessary but illogical
+        return newItemAdded
     }
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         // Get a new or recycled cell
