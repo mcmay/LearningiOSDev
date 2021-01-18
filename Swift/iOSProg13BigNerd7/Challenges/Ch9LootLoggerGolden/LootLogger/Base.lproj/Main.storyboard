@@ -34,16 +34,28 @@
                                         <action selector="addNewItem:" destination="mxc-0H-mj5" eventType="touchUpInside" id="EBq-nF-XAv"/>
                                     </connections>
                                 </button>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vit-Xk-pmz">
+                                    <rect key="frame" x="176" y="15" width="62" height="30"/>
+                                    <state key="normal" title="Favorites"/>
+                                    <connections>
+                                        <action selector="showFavorites:" destination="mxc-0H-mj5" eventType="touchUpInside" id="4cH-gE-cRM"/>
+                                    </connections>
+                                </button>
                             </subviews>
                             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             <constraints>
+                                <constraint firstAttribute="trailing" secondItem="Vit-Xk-pmz" secondAttribute="trailing" constant="176" id="6Mb-dv-zU5"/>
                                 <constraint firstItem="QH5-iw-o3p" firstAttribute="width" secondItem="Rfl-9c-egj" secondAttribute="width" id="7AH-Wv-IN0"/>
                                 <constraint firstItem="Rfl-9c-egj" firstAttribute="centerY" secondItem="EjD-ku-dkm" secondAttribute="centerY" id="ARC-0r-pgi"/>
+                                <constraint firstItem="Vit-Xk-pmz" firstAttribute="leading" secondItem="EjD-ku-dkm" secondAttribute="leading" constant="176" id="AeS-OX-rEy"/>
+                                <constraint firstItem="Vit-Xk-pmz" firstAttribute="top" secondItem="EjD-ku-dkm" secondAttribute="top" constant="15" id="D6m-ya-V0R"/>
                                 <constraint firstItem="QH5-iw-o3p" firstAttribute="leading" secondItem="Rfl-9c-egj" secondAttribute="trailing" constant="8" id="Hoc-6w-ZZi"/>
+                                <constraint firstAttribute="bottom" secondItem="Vit-Xk-pmz" secondAttribute="bottom" constant="15" id="IGw-tr-8Ge"/>
                                 <constraint firstItem="QH5-iw-o3p" firstAttribute="top" secondItem="EjD-ku-dkm" secondAttribute="top" constant="15" id="Pc8-Mk-ce2"/>
                                 <constraint firstAttribute="bottom" secondItem="Rfl-9c-egj" secondAttribute="bottom" constant="15" id="R3a-mN-AsW"/>
                                 <constraint firstItem="Rfl-9c-egj" firstAttribute="top" secondItem="EjD-ku-dkm" secondAttribute="top" constant="15" id="Whr-KE-u0g"/>
                                 <constraint firstAttribute="trailing" secondItem="QH5-iw-o3p" secondAttribute="trailing" constant="8" id="XrV-6y-2FR"/>
+                                <constraint firstItem="Vit-Xk-pmz" firstAttribute="centerX" secondItem="EjD-ku-dkm" secondAttribute="centerX" id="aNV-yd-3Rt"/>
                                 <constraint firstItem="Rfl-9c-egj" firstAttribute="leading" secondItem="EjD-ku-dkm" secondAttribute="leading" constant="8" id="iXB-wH-NEV"/>
                                 <constraint firstAttribute="bottom" secondItem="QH5-iw-o3p" secondAttribute="bottom" constant="15" id="p8N-7R-V4q"/>
                                 <constraint firstItem="QH5-iw-o3p" firstAttribute="centerY" secondItem="EjD-ku-dkm" secondAttribute="centerY" id="x62-2F-hya"/>
@@ -83,7 +95,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pFK-kb-XfS" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="925" y="162"/>
+            <point key="canvasLocation" x="924.63768115942037" y="161.38392857142856"/>
         </scene>
     </scenes>
     <resources>

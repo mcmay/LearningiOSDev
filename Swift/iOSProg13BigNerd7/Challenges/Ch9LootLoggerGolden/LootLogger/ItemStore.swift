@@ -16,7 +16,7 @@ class ItemStore {
     }
     let ascending = false
     var sectionsSorted: [(header: String, items: [Item])] { sections.sorted {
-        return ascending ? ($0.items.first!.valueInDollars < $1.items.first!.valueInDollars) : ($0.items.first!.valueInDollars >= $1.items.first!.valueInDollars)
+            return ascending ? ($0.items.first!.valueInDollars < $1.items.first!.valueInDollars) : ($0.items.first!.valueInDollars >= $1.items.first!.valueInDollars)
         }
     }
     

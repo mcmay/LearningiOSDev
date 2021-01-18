@@ -68,6 +68,22 @@ class ItemsViewController: UITableViewController {
         }
     }
     
+    @IBAction func showFavorites(_ sender: UIButton) {
+        
+        if sections.contains(where: { $0.items.contains(where: { $0.isFavorite } )}) {
+            var sects = sections
+            for (s, r) in zip(sects!.indices, sects!) {
+                for (n, item) in zip(r.items.indices, r.items) {
+                    if item.isFavorite == false {
+                        print("s: \(s) --- n: \(n) *** item: \(item)")
+                        self.tableView(self.tableView, commit: UITableViewCell.EditingStyle.delete, forRowAt: IndexPath(row: n, section: s))
+                        sects = sections
+                    }
+                }
+            }
+        }
+    }
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return sections[section].items.count
     }
@@ -103,6 +119,7 @@ class ItemsViewController: UITableViewController {
                             forRowAt indexPath: IndexPath) {
         // If the table view is asking to commit a delete command...
         if editingStyle == .delete {
+            print("indexPath.section: \(indexPath.section) **** indexPath.row: \(indexPath.row)")
             let item = sections[indexPath.section].items[indexPath.row]
             // Remove the item from the store
             itemStore.removeItem(item)
@@ -128,13 +145,19 @@ class ItemsViewController: UITableViewController {
     override func tableView(_ tableView: UITableView,
                             leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath)
                     -> UISwipeActionsConfiguration? {
-        let toggleIsFavorite = UIContextualAction(style: .normal, title: "Favorite", handler: { [self](ac: UIContextualAction, view: UIView, actionPeformed: (Bool)->Void) in
+        let toggleIsFavorite = UIContextualAction(style: .normal, title: "Favorite", handler: { [self]/* Compiler warns this needs to be here for disambiguity of the context */
+            (ac: UIContextualAction, view: UIView, actionPerformed: (Bool)->Void) in
             
-            var item = sections[indexPath.section].items[indexPath.row]
-            item.isFavorite = true
+            let item = sections[indexPath.section].items[indexPath.row]
+            sections[indexPath.section].items[indexPath.row].isFavorite = true
+            for (i, itm) in itemStore.allItems.enumerated() {
+                if itm == item {
+                    itemStore.allItems[i].isFavorite = true
+                }
+            }
             let cell = tableView.cellForRow(at: indexPath)
             cell!.textLabel?.text = item.name + "(Favorite)"
-            actionPeformed(true)
+            actionPerformed(true)
         })
         return UISwipeActionsConfiguration(actions: [toggleIsFavorite])
     }
