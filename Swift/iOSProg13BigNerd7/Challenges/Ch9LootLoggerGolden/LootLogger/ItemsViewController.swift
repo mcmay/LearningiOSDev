@@ -70,21 +70,27 @@ class ItemsViewController: UITableViewController {
     
     @IBAction func showFavorites(_ sender: UIButton) {
         
-        if sections.contains(where: { $0.items.contains(where: { $0.isFavorite } )}) {
-            var sects = sections
-            for (s, r) in zip(sects!.indices, sects!) {
-                for (n, item) in zip(r.items.indices, r.items) {
-                    if item.isFavorite == false {
-                        print("s: \(s) --- n: \(n) *** item: \(item)")
-                        self.tableView(self.tableView, commit: UITableViewCell.EditingStyle.delete, forRowAt: IndexPath(row: n, section: s))
-                        sects = sections
-                    }
+        if let sections = sections, sections.contains(where: { $0.items.contains(where: { $0.isFavorite } )}) {
+            let sects = sections
+            deleteCells(sects)
+        }
+    }
+    
+    func deleteCells (_ sects: [(header: String, items: [Item])]) {
+        for (s, r) in zip(sects.indices, sects) {
+            for (n, item) in zip(r.items.indices, r.items) {
+                if item.isFavorite == false {
+                    print("s: \(s) **** r: \(n)")
+                    //print(self.sections!)
+                    self.tableView(self.tableView, commit: UITableViewCell.EditingStyle.delete, forRowAt: IndexPath(row: n, section: s))
+                    deleteCells(self.sections)
                 }
             }
         }
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        print("section: \(section)--- row: \(sections[section].items.count)")
         return sections[section].items.count
     }
     override func numberOfSections (in tableView: UITableView) -> Int {
@@ -114,15 +120,14 @@ class ItemsViewController: UITableViewController {
         return cell
     }
     
+    // Delete cells
     override func tableView(_ tableView: UITableView,
                             commit editingStyle: UITableViewCell.EditingStyle,
                             forRowAt indexPath: IndexPath) {
         // If the table view is asking to commit a delete command...
         if editingStyle == .delete {
-            print("indexPath.section: \(indexPath.section) **** indexPath.row: \(indexPath.row)")
-            let item = sections[indexPath.section].items[indexPath.row]
             // Remove the item from the store
-            itemStore.removeItem(item)
+            itemStore.removeItem(sections[indexPath.section].items[indexPath.row])
             sections[indexPath.section].items.remove(at: indexPath.row)
             
             // Also remove that row from the table view with an animation
