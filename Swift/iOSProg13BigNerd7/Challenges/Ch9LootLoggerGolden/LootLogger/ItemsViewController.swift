@@ -80,11 +80,12 @@ class ItemsViewController: UITableViewController {
         var finished = false
         for (s, r) in zip(sects.indices, sects) {
             for (n, item) in zip(r.items.indices, r.items) {
-                if item.isFavorite == false, !finished {
+                if item.isFavorite == false {
                     self.tableView(self.tableView, commit: UITableViewCell.EditingStyle.delete, forRowAt: IndexPath(row: n, section: s))
                     deleteNonfavoriteCells(self.sections)
                     finished = true
                 }
+                if finished { break }
             }
         }
     }
