@@ -72,25 +72,24 @@ class ItemsViewController: UITableViewController {
         
         if let sections = sections, sections.contains(where: { $0.items.contains(where: { $0.isFavorite } )}) {
             let sects = sections
-            deleteCells(sects)
+            deleteNonfavoriteCells(sects)
         }
     }
     
-    func deleteCells (_ sects: [(header: String, items: [Item])]) {
+    func deleteNonfavoriteCells (_ sects: [(header: String, items: [Item])]) {
+        var finished = false
         for (s, r) in zip(sects.indices, sects) {
             for (n, item) in zip(r.items.indices, r.items) {
-                if item.isFavorite == false {
-                    print("s: \(s) **** r: \(n)")
-                    //print(self.sections!)
+                if item.isFavorite == false, !finished {
                     self.tableView(self.tableView, commit: UITableViewCell.EditingStyle.delete, forRowAt: IndexPath(row: n, section: s))
-                    deleteCells(self.sections)
+                    deleteNonfavoriteCells(self.sections)
+                    finished = true
                 }
             }
         }
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        print("section: \(section)--- row: \(sections[section].items.count)")
         return sections[section].items.count
     }
     override func numberOfSections (in tableView: UITableView) -> Int {
@@ -136,6 +135,7 @@ class ItemsViewController: UITableViewController {
             if sections[indexPath.section].items.count == 0 {
                 sections.remove(at: indexPath.section)
                 tableView.deleteSections(IndexSet(integer: indexPath.section), with: .automatic)
+                idx = -1
             }
         }
     }
