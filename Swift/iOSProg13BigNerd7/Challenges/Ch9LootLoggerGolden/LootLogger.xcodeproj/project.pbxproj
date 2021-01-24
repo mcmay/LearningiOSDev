@@ -12,8 +12,6 @@
 		95753127234C43DB00229B3E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 95753125234C43DB00229B3E /* Main.storyboard */; };
 		95753129234C43DC00229B3E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 95753128234C43DC00229B3E /* Assets.xcassets */; };
 		9575312C234C43DC00229B3E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9575312A234C43DC00229B3E /* LaunchScreen.storyboard */; };
-		95753137234C43DC00229B3E /* LootLoggerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95753136234C43DC00229B3E /* LootLoggerTests.swift */; };
-		95753142234C43DC00229B3E /* LootLoggerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95753141234C43DC00229B3E /* LootLoggerUITests.swift */; };
 		95753150234C441600229B3E /* ItemsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9575314F234C441600229B3E /* ItemsViewController.swift */; };
 		95753152234C450000229B3E /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95753151234C450000229B3E /* Item.swift */; };
 		95753154234C45B000229B3E /* ItemStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95753153234C45B000229B3E /* ItemStore.swift */; };
@@ -45,11 +43,7 @@
 		9575312B234C43DC00229B3E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9575312D234C43DC00229B3E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		95753132234C43DC00229B3E /* LootLoggerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LootLoggerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		95753136234C43DC00229B3E /* LootLoggerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LootLoggerTests.swift; sourceTree = "<group>"; };
-		95753138234C43DC00229B3E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9575313D234C43DC00229B3E /* LootLoggerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LootLoggerUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		95753141234C43DC00229B3E /* LootLoggerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LootLoggerUITests.swift; sourceTree = "<group>"; };
-		95753143234C43DC00229B3E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9575314F234C441600229B3E /* ItemsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemsViewController.swift; sourceTree = "<group>"; };
 		95753151234C450000229B3E /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
 		95753153234C45B000229B3E /* ItemStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemStore.swift; sourceTree = "<group>"; };
@@ -84,8 +78,6 @@
 			isa = PBXGroup;
 			children = (
 				9575311E234C43DB00229B3E /* LootLogger */,
-				95753135234C43DC00229B3E /* LootLoggerTests */,
-				95753140234C43DC00229B3E /* LootLoggerUITests */,
 				9575311D234C43DB00229B3E /* Products */,
 			);
 			sourceTree = "<group>";
@@ -114,24 +106,6 @@
 				9575312D234C43DC00229B3E /* Info.plist */,
 			);
 			path = LootLogger;
-			sourceTree = "<group>";
-		};
-		95753135234C43DC00229B3E /* LootLoggerTests */ = {
-			isa = PBXGroup;
-			children = (
-				95753136234C43DC00229B3E /* LootLoggerTests.swift */,
-				95753138234C43DC00229B3E /* Info.plist */,
-			);
-			path = LootLoggerTests;
-			sourceTree = "<group>";
-		};
-		95753140234C43DC00229B3E /* LootLoggerUITests */ = {
-			isa = PBXGroup;
-			children = (
-				95753141234C43DC00229B3E /* LootLoggerUITests.swift */,
-				95753143234C43DC00229B3E /* Info.plist */,
-			);
-			path = LootLoggerUITests;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -277,7 +251,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				95753137234C43DC00229B3E /* LootLoggerTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -285,7 +258,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				95753142234C43DC00229B3E /* LootLoggerUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
