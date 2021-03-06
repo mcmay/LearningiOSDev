@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ItemsViewController: UITableViewController {
+class ItemsViewController: UITableViewController, UIGestureRecognizerDelegate {
     var itemStore: ItemStore!
     
     override func viewDidLoad() {
@@ -16,6 +16,9 @@ class ItemsViewController: UITableViewController {
         //tableView.rowHeight = 65
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 65
+        // The current view controller holds the backBarButtonItem of the next view controller. Queer.
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+        navigationController?.interactivePopGestureRecognizer?.delegate = self
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
