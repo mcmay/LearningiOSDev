@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		885D857325EA7239006E4E61 /* ItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 885D857225EA7239006E4E61 /* ItemCell.swift */; };
 		886A417025D4E87C0082505E /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 886A416F25D4E87C0082505E /* DetailViewController.swift */; };
+		8871A47F25F3A31700A6ED2C /* DatePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8871A47E25F3A31700A6ED2C /* DatePickerViewController.swift */; };
 		88C2245725C8D8BD003D6A7C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88C2245625C8D8BD003D6A7C /* AppDelegate.swift */; };
 		88C2245925C8D8BD003D6A7C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88C2245825C8D8BD003D6A7C /* SceneDelegate.swift */; };
 		88C2245B25C8D8BD003D6A7C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88C2245A25C8D8BD003D6A7C /* ViewController.swift */; };
@@ -23,6 +24,7 @@
 /* Begin PBXFileReference section */
 		885D857225EA7239006E4E61 /* ItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemCell.swift; sourceTree = "<group>"; };
 		886A416F25D4E87C0082505E /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
+		8871A47E25F3A31700A6ED2C /* DatePickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerViewController.swift; sourceTree = "<group>"; };
 		88C2245325C8D8BD003D6A7C /* LootLogger.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LootLogger.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		88C2245625C8D8BD003D6A7C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		88C2245825C8D8BD003D6A7C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -78,6 +80,7 @@
 				88D04D0125CAB6A300A2BCF8 /* ItemStore.swift */,
 				886A416F25D4E87C0082505E /* DetailViewController.swift */,
 				885D857225EA7239006E4E61 /* ItemCell.swift */,
+				8871A47E25F3A31700A6ED2C /* DatePickerViewController.swift */,
 			);
 			path = LootLogger;
 			sourceTree = "<group>";
@@ -154,6 +157,7 @@
 			files = (
 				885D857325EA7239006E4E61 /* ItemCell.swift in Sources */,
 				88C2246F25C975B3003D6A7C /* Item.swift in Sources */,
+				8871A47F25F3A31700A6ED2C /* DatePickerViewController.swift in Sources */,
 				88C2246C25C97438003D6A7C /* ItemsViewControler.swift in Sources */,
 				88D04D0225CAB6A300A2BCF8 /* ItemStore.swift in Sources */,
 				88C2245B25C8D8BD003D6A7C /* ViewController.swift in Sources */,
