@@ -11,12 +11,10 @@ class DatePickerViewController: UIViewController {
     
     @IBOutlet var datePicker: UIDatePicker!
     
-    var newDate: Date!
-    
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
-        newDate = datePicker.date
-        print(newDate!)
+        let detailViewController = navigationController?.topViewController as! DetailViewController
+        detailViewController.newDate = datePicker.date
     }
 }

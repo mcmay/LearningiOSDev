@@ -24,6 +24,7 @@ class DetailViewController: UIViewController, UITextFieldDelegate {
             navigationItem.title = item.name
         }
     }
+    var newDate: Date!
     let numberFormatter: NumberFormatter = {
         let formatter = NumberFormatter()
         
@@ -50,7 +51,9 @@ class DetailViewController: UIViewController, UITextFieldDelegate {
         //dateLabel.text = "\(item.dateCreated)"
         valueField.text = numberFormatter.string(from: NSNumber(value: item.valueInDollars))
         dateLabel.text = dateFormatter.string(from: item.dateCreated)
-        
+        if let date = newDate {
+            dateLabel.text = dateFormatter.string(from: date)
+        }
     }
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
