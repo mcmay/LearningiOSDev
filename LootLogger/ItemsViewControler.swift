@@ -9,6 +9,7 @@ import UIKit
 
 class ItemsViewController: UITableViewController, UIGestureRecognizerDelegate {
     var itemStore: ItemStore!
+    var imageStore: ImageStore!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -94,6 +95,9 @@ class ItemsViewController: UITableViewController, UIGestureRecognizerDelegate {
             // Remove the item from the store
             itemStore.removeItem(item)
             
+            // Remove the item's image from the image store
+            imageStore.deleteImage(forKey: item.itemKey)
+            
             // Also remove that row from the table view with an animation
             tableView.deleteRows(at: [indexPath], with: .automatic)
         }
@@ -113,6 +117,7 @@ class ItemsViewController: UITableViewController, UIGestureRecognizerDelegate {
                     let detailViewController = segue.destination as! DetailViewController
                     
                     detailViewController.item = item
+                    detailViewController.imageStore = imageStore
                 }
             default:
                 preconditionFailure("Unexpected segue identifier")
