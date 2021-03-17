@@ -19,7 +19,6 @@ class DetailViewController: UIViewController, UITextFieldDelegate,
     @IBOutlet var dateLabel: UILabel!
     @IBOutlet var imageView: UIImageView!
     
-    var newDate: Date!
     let numberFormatter: NumberFormatter = {
         let formatter = NumberFormatter()
         
@@ -107,9 +106,13 @@ class DetailViewController: UIViewController, UITextFieldDelegate,
         //dateLabel.text = "\(item.dateCreated)"
         valueField.text = numberFormatter.string(from: NSNumber(value: item.valueInDollars))
         dateLabel.text = dateFormatter.string(from: item.dateCreated)
-        if let date = newDate {
-            dateLabel.text = dateFormatter.string(from: date)
-        }
+        
+        // Get the item key
+        let key = item.itemKey
+        
+        // If there is an associated image with the item, display it on the image view
+        let imageToDisplay = imageStore.image(forKey: key)
+        imageView.image = imageToDisplay
     }
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)

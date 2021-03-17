@@ -116,6 +116,7 @@ class ItemsViewController: UITableViewController, UIGestureRecognizerDelegate {
                     let item = itemStore.allItems[row]
                     let detailViewController = segue.destination as! DetailViewController
                     
+                    // dependency injection -- into DetailViewController object
                     detailViewController.item = item
                     detailViewController.imageStore = imageStore
                 }
