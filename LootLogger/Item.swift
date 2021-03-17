@@ -40,6 +40,7 @@ class Item: Equatable, Codable {
         return lhs.name == rhs.name &&
                 lhs.serialNumber == rhs.serialNumber &&
                 lhs.valueInDollars == rhs.valueInDollars &&
-                lhs.dateCreated == rhs.dateCreated
+                lhs.dateCreated == rhs.dateCreated &&
+                lhs.itemKey == rhs.itemKey
     }
 }

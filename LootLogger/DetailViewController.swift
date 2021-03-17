@@ -48,6 +48,7 @@ class DetailViewController: UIViewController, UITextFieldDelegate,
     @IBAction func choosePhotoSource(_ sender: UIBarButtonItem) {
         let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         alertController.modalPresentationStyle = .popover
+        // show pointer of altercontroller's view
         alertController.popoverPresentationController?.barButtonItem = sender
         if UIImagePickerController.isSourceTypeAvailable(.camera) {
             let camerAction = UIAlertAction(title: "Camera", style: .default) {

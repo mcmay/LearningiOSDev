@@ -25,10 +25,9 @@ class ItemStore {
             print("Error reading in saved items: \(error)")
         }
         let notificationCenter = NotificationCenter.default
-        if #available(iOS 13, *) {
-            notificationCenter.addObserver(self, selector: #selector(saveChanges),
+        
+        notificationCenter.addObserver(self, selector: #selector(saveChanges),
                                            name: UIScene.didEnterBackgroundNotification, object: nil)
-        }
     }
     @discardableResult func createItem () -> Item {
         let newItem = Item(random: true)
@@ -55,6 +54,7 @@ class ItemStore {
         // Insert item in array at new location
         allItems.insert(movedItem, at: toIndex)
     }
+    // ref.: notificationCenter.addObserver in init()
     @objc func saveChanges () throws {
         do {
             let encoder = PropertyListEncoder()
