@@ -42,6 +42,7 @@ class DetailViewController: UIViewController, UITextFieldDelegate,
         }
     }
     var imageStore: ImageStore!
+    
     @IBAction func backgroundTapped(_ sender: UITapGestureRecognizer) {
         view.endEditing(true)
     }
@@ -71,7 +72,7 @@ class DetailViewController: UIViewController, UITextFieldDelegate,
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
         alertController.addAction(cancelAction)
         
-        present(alertController, animated: true, completion: nil)
+        self.present(alertController, animated: true, completion: nil)
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -83,11 +84,17 @@ class DetailViewController: UIViewController, UITextFieldDelegate,
         let imagePicker = UIImagePickerController()
         imagePicker.sourceType = sourceType
         imagePicker.delegate = self
+        imagePicker.allowsEditing = true
+        
         return imagePicker
     }
+    /*The delegate receives notifications when the user picks an image or movie, or exits the picker interface.
+     The delegate also decides when to dismiss the picker interface, so you must provide a delegate to use a picker.
+     If this property is nil, the picker is dismissed immediately if you try to show it.
+     */
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         // Get picked image from info dictionary
-        let image = info[UIImagePickerController.InfoKey.originalImage] as! UIImage
+        let image = info[UIImagePickerController.InfoKey.editedImage] as! UIImage
         
         // Store the image in the ImageStore for the item's key
         imageStore.setImage(image, forKey: item.itemKey)

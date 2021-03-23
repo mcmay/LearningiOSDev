@@ -27,7 +27,8 @@ class ItemStore {
         let notificationCenter = NotificationCenter.default
         
         notificationCenter.addObserver(self, selector: #selector(saveChanges),
-                                           name: UIScene.didEnterBackgroundNotification, object: nil)
+                                           name: UIScene.didEnterBackgroundNotification,
+                                           object: nil)
     }
     @discardableResult func createItem () -> Item {
         let newItem = Item(random: true)
