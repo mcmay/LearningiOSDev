@@ -75,6 +75,24 @@ class DetailViewController: UIViewController, UITextFieldDelegate,
         self.present(alertController, animated: true, completion: nil)
     }
     
+    @IBAction func deleteImage(_ sender: UIBarButtonItem) {
+        let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        alertController.modalPresentationStyle = .popover
+        // show pointer of altercontroller's view
+        alertController.popoverPresentationController?.barButtonItem = sender
+        
+        let deleteImageAction = UIAlertAction(title: "Delete image", style: .default) {
+            _ in
+            
+            self.imageView.image = nil
+            self.imageStore.deleteImage(forKey: self.item.itemKey)
+        }
+        alertController.addAction(deleteImageAction)
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        alertController.addAction(cancelAction)
+        self.present(alertController, animated: true, completion: nil)
+    }
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         
