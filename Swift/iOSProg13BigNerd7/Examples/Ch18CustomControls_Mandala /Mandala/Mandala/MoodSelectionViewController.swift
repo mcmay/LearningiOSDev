@@ -8,13 +8,14 @@
 import UIKit
 
 class MoodSelectionViewController: UIViewController {
-    @IBOutlet var stackView: UIStackView!
+    //@IBOutlet var stackView: UIStackView!
+    @IBOutlet var moodSelector: ImageSelector!
     @IBOutlet var addMoodButton: UIButton!
     
     var moods: [Mood] = [] {
         didSet {
             currentMood = moods.first
-            moodButtons = moods.map { mood in
+            /*moodButtons = moods.map { mood in
                 let moodButton = UIButton()
                 
                 moodButton.setImage(mood.image, for: .normal)
@@ -23,15 +24,16 @@ class MoodSelectionViewController: UIViewController {
                 moodButton.addTarget(self, action: #selector(moodSelectionChanged(_:)), for: .touchUpInside)
                 
                 return moodButton
-            }
+            }*/
+            moodSelector.images = moods.map{ $0.image }
         }
     }
-    var moodButtons: [UIButton] = [] {
+    /*var moodButtons: [UIButton] = [] {
         didSet {
             oldValue.forEach{ $0.removeFromSuperview() }
             moodButtons.forEach{ stackView.addArrangedSubview($0) }
         }
-    }
+    }*/
     var currentMood: Mood? {
         didSet {
             guard let currentMood = currentMood else {
@@ -44,10 +46,15 @@ class MoodSelectionViewController: UIViewController {
         }
     }
     // This method is referred to as a #selector argument in var moods: [Mood]
-    @objc func moodSelectionChanged (_ sender: UIButton) {
+    /*@objc private func moodSelectionChanged (_ sender: UIButton) {
         guard let selectedIndex = moodButtons.firstIndex(of: sender) else {
             preconditionFailure("Unable to find the tapped button in the button array")
         }
+        currentMood = moods[selectedIndex]
+    }*/
+    @IBAction private func moodSelectionChanged (_ sender: ImageSelector) {
+        let selectedIndex = sender.selectedIndex
+        
         currentMood = moods[selectedIndex]
     }
     override func viewDidLoad() {
