@@ -94,6 +94,8 @@ class ImageSelector: UIControl {
             preconditionFailure("The buttons and images are not parallel.")
         }
         selectedIndex = buttonIndex
+        sendActions(for: .valueChanged) // Remeber to send action!
+        // Example in book mentioned this operation but I didn't add the statement. Suck!
     }
     private let highlightView: UIView = {
         let view = UIView()
