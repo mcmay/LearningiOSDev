@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina6_5" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Mood Selection View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="MoodSelectionViewController" customModule="Mandala" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lmJ-8D-QSN">
+                                <rect key="frame" x="0.0" y="798" width="414" height="98"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="ZKo-Af-M1S">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="98"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <subviews>
+                                        <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="zpC-TQ-ebb">
+                                            <rect key="frame" x="8" y="8" width="71" height="48"/>
+                                            <subviews>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tr1-U4-uMH">
+                                                    <rect key="frame" x="0.0" y="20" width="71" height="8"/>
+                                                    <color key="backgroundColor" red="0.88235294119999996" green="0.34509803919999998" blue="0.16078431369999999" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <state key="normal" title="Add Mood">
+                                                        <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                    </state>
+                                                </button>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="bottom" secondItem="tr1-U4-uMH" secondAttribute="bottom" constant="20" id="l6T-2u-bZR"/>
+                                                <constraint firstAttribute="height" constant="48" id="o00-qu-cQf"/>
+                                            </constraints>
+                                        </stackView>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="trailingMargin" secondItem="zpC-TQ-ebb" secondAttribute="trailingMargin" id="1cQ-FQ-fNj"/>
+                                        <constraint firstItem="zpC-TQ-ebb" firstAttribute="leading" secondItem="ZKo-Af-M1S" secondAttribute="leadingMargin" id="Jaq-22-JBE"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="zpC-TQ-ebb" secondAttribute="bottomMargin" id="ij8-cH-7ki"/>
+                                        <constraint firstItem="zpC-TQ-ebb" firstAttribute="top" secondItem="ZKo-Af-M1S" secondAttribute="top" constant="8" id="mdt-KY-ALq"/>
+                                    </constraints>
+                                </view>
+                                <blurEffect style="regular"/>
+                            </visualEffectView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="lmJ-8D-QSN" secondAttribute="bottom" id="8I6-8f-HcF"/>
+                            <constraint firstAttribute="trailing" secondItem="lmJ-8D-QSN" secondAttribute="trailing" id="DXe-bt-dKD"/>
+                            <constraint firstItem="tr1-U4-uMH" firstAttribute="width" secondItem="6Tk-OE-BBY" secondAttribute="width" constant="0.5" id="Ifd-pU-oQj"/>
+                            <constraint firstItem="lmJ-8D-QSN" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="jPQ-e9-3n0"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="56.521739130434788" y="87.723214285714278"/>
+        </scene>
+    </scenes>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>
