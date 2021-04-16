@@ -7,7 +7,11 @@
 
 import Foundation
 
-struct MoodEntry {
+struct MoodEntry: Equatable {
     var mood: Mood
     var timpestamp: Date
+    
+    static func == (lhs: MoodEntry, rhs: MoodEntry) -> Bool {
+        return lhs.mood == rhs.mood && lhs.timpestamp == rhs.timpestamp
+    }
 }

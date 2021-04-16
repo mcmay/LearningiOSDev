@@ -7,7 +7,7 @@
 
 import UIKit
 
-struct Mood {
+struct Mood: Equatable {
     var name: String
     var image: UIImage
     var color: UIColor
