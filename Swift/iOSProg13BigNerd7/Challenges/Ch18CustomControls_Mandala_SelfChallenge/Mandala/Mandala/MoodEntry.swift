@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct MoodEntry: Equatable {
+struct MoodEntry: Equatable, Codable {
     var mood: Mood
     var timpestamp: Date
     
