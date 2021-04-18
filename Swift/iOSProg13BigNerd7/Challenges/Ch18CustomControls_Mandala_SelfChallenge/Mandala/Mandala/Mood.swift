@@ -24,33 +24,42 @@ class Mood: Equatable {
             && lhs.color == rhs.color
     }
     func encode (to encoder: Encoder) throws {
-        var container = encoder.container(keyedBy: CodingKeys.self)
         
-        try container.encode(name, forKey: .name)
-        let imageData = image.pngData()
-        imageBase64String = imageData!.base64EncodedString()
-        try container.encode(imageBase64String, forKey: .image)
-        
-        let colorData = try NSKeyedArchiver.archivedData(withRootObject: color,
-                                                         requiringSecureCoding: false)
-        try container.encode(colorData, forKey: .color)
+        do {
+            var container = encoder.container(keyedBy: CodingKeys.self)
+            
+            try container.encode(name, forKey: .name)
+            let imageData = image.pngData()
+            imageBase64String = imageData!.base64EncodedString()
+            try container.encode(imageBase64String, forKey: .imageBase64String)
+            
+            let colorData = try NSKeyedArchiver.archivedData(withRootObject: color,
+                                                             requiringSecureCoding: false)
+            try container.encode(colorData, forKey: .color)
+        } catch {
+            print("Error encoding entries: \(error)")
+        }
     }
     
     required init (from decoder: Decoder) throws {
+        
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        
+            
         name = try container.decode(String.self, forKey: .name)
-        
+                                                            
         imageBase64String = try container.decode(String.self, forKey: .imageBase64String)
-        
+                                                                // I mistakenly typed ".image" here
+                                                                // instead of .imageBased64String
+                                                                // when I decoded it, the key became ".imageBase64String.
+                                                                // Hence, the decoding error.
         let imageData = Data(base64Encoded: imageBase64String)
-        
+            
         //if let imageData = imageData {
             image = UIImage(data: imageData!)!
-       // }
-        
+        // }
+            
         let colorData = try container.decode(Data.self, forKey: .color)
-        
+            
         color = try NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(colorData) as? UIColor ?? UIColor.black
     }
 }

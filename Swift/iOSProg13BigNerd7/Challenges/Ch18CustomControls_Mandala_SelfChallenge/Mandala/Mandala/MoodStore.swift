@@ -21,6 +21,7 @@ class MoodStore {
             let data = try Data(contentsOf: entryArchiveURL)
             let unarchiver = PropertyListDecoder()
             let entries = try unarchiver.decode([MoodEntry].self, from: data)
+            
             allEntries = entries
         } catch {
             print("Error reading in saved items: \(error)")
