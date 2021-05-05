@@ -43,7 +43,7 @@ struct FlickrAPI {
         
         return components.url!
     }
-    static var interestingPhotURL: URL {
+    static var interestingPhotoURL: URL {
         // url_z is a URL shortener (zipper) for convenience and beauty
         return flickrURL(endPoint: .interestingPhotos,
                          parameters: ["extras": "url_z,date_taken"])
@@ -52,7 +52,7 @@ struct FlickrAPI {
         do {
             let decoder = JSONDecoder()
             let flickrResponse = try decoder.decode(FlickrResponse.self, from: data)
-            
+    
             return .success(flickrResponse.photosInfo.photos)
         } catch {
             return .failure(error)

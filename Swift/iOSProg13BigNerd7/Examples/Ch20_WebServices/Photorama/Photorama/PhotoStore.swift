@@ -22,15 +22,15 @@ class PhotoStore {
     }
     
     func fetchInterestingPhotos (completion: @escaping (Result<[Photo], Error>) -> Void) {
-        let url = FlickrAPI.interestingPhotURL
+        let url = FlickrAPI.interestingPhotoURL
         let request = URLRequest(url: url)
         let task = session.dataTask(with: request) {
             (data, response, error) in
             
-            /*if let jsonData = data {
-                if let jsonString = String(data: jsonData, encoding: .utf8) {
-                    print(jsonString)
-                }
+        /*if let jsonData = data {
+            if let jsonString = String(data: jsonData, encoding: .utf8) {
+                print(jsonString)
+            }
             } else if let requestError = error {
                 print("Error fetching interest photos: \(requestError)")
             } else {
