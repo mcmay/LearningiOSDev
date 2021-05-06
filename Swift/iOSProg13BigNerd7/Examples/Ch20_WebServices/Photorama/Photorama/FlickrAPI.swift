@@ -53,7 +53,7 @@ struct FlickrAPI {
             let decoder = JSONDecoder()
             let flickrResponse = try decoder.decode(FlickrResponse.self, from: data)
     
-            return .success(flickrResponse.photosInfo.photos)
+            return .success(flickrResponse.photoInfo.photo)
         } catch {
             return .failure(error)
         }
@@ -62,18 +62,53 @@ struct FlickrAPI {
 
 struct FlickrResponse: Codable {
     //let photos: FlickrPhotosResponse
-    let photosInfo: FlickrPhotosResponse
+    let extra: Extra
+    let stat: String
+    let photoInfo: FlickrPhotosResponse
     
     enum CodingKeys: String, CodingKey {
-        case photosInfo = "photos"
+        case stat, extra
+        case photoInfo = "photos"
     }
 }
 
 struct FlickrPhotosResponse: Codable {
-    //let photo: [Photo]
-    let photos: [Photo]
+    
+    let page, pages, perpage, total: Int
+    let photo: [Photo] // This variable name "photo" must not be changed.
+    // Or else, there will be problem with decoding json data
     
     enum CodingKyes: String, CodingKey {
-        case photos = "photo"
+        case page, pages, perpage, total
     }
 }
+// This file was generated from JSON Schema using quicktype, do not modify it directly.
+// To parse the JSON, add this file to your project and do:
+//
+//   let welcome = try? newJSONDecoder().decode(Welcome.self, from: jsonData)
+
+// MARK: - Welcome
+/*struct Welcome: Codable {
+    let extra: Extra
+    let photos: Photos
+    let stat: String
+}*/
+// MARK: - Extra
+struct Extra: Codable {
+    let exploreDate: String
+    let nextPreludeInterval: Int
+
+    enum CodingKeys: String, CodingKey {
+        case exploreDate = "explore_date"
+        case nextPreludeInterval = "next_prelude_interval"
+    }
+}
+
+// MARK: - Photos
+/*struct Photos: Codable {
+    let page, pages, perpage, total: Int
+    let photo: [Photo]
+}*/
+
+
+
