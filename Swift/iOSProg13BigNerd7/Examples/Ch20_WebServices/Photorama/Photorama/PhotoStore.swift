@@ -5,7 +5,7 @@
 //  Created by Chao Mei on 27/4/21.
 //
 
-import Foundation
+import UIKit
 
 class PhotoStore {
     private let session: URLSession = {
@@ -41,4 +41,38 @@ class PhotoStore {
         }
         task.resume()
     }
+    func fetchImage (for photo: Photo, completion: @escaping (Result<UIImage, Error>) -> Void) {
+        /*guard let photoURL = photo.urlZ else {
+            completion(.failure(PhotoError.missingImageURL))
+            return
+        }*/
+        guard let requestURL = URL(string: photo.urlZ)  else {
+            completion(.failure(PhotoError.missingImageURL))
+            return
+        }
+        let request = URLRequest(url: requestURL)
+        let task = session.dataTask(with: request) {
+            (data, response, error) in
+            let result = self.processImageRequest(data: data, error: error)
+            completion(result)
+        }
+        task.resume()
+    }
+    private func processImageRequest (data: Data?, error: Error?) -> Result<UIImage, Error> {
+        guard let imageData = data,
+              let image = UIImage(data: imageData) else {
+            // Couldn't create an image
+            if data == nil {
+                return .failure(error!)
+            } else {
+                return .failure(PhotoError.imageCreationError)
+            }
+        }
+        return .success(image)
+    }
+}
+
+enum PhotoError: Error {
+    case imageCreationError
+    case missingImageURL
 }

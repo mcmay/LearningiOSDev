@@ -51,6 +51,15 @@ struct FlickrAPI {
     static func photos (fromJSON data: Data) -> Result<[Photo], Error> {
         do {
             let decoder = JSONDecoder()
+            /*
+             As the date format in the JSON data is the same
+             as the default date format in the system, the
+             following code is optional.
+             let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+            dateFormatter.locale = Locale(identifier: "en_US_POSIX")
+            dateFormatter.timeZone = TimeZone(secondsFromGMT: 0)
+            decoder.dateDecodingStrategy = .formatted(dateFormatter)*/
             let flickrResponse = try decoder.decode(FlickrResponse.self, from: data)
     
             return .success(flickrResponse.photoInfo.photo)
