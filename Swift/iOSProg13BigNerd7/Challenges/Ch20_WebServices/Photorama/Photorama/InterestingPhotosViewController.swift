@@ -16,7 +16,7 @@ class InterestingPhotosViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         // store.fetchInterestingPhotos()
-        store.fetchInterestingPhotos {
+        store.fetchPhotos (for: PhotoType.interestingPhotos) {
             (photoResult) in
             
             // photos and error are contained in photoResult

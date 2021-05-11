@@ -21,8 +21,8 @@ class PhotoStore {
         return FlickrAPI.photos(fromJSON: jsonData)
     }
     
-    func fetchInterestingPhotos (_ type: PhotoType, completion: @escaping (Result<[Photo], Error>) -> Void) {
-        var url: URL = URL(string: "http://defaultURL")! //TODO
+    func fetchPhotos (for type: PhotoType, completion: @escaping (Result<[Photo], Error>) -> Void) {
+        var url: URL!
         
         if type == .interestingPhotos {
             url = FlickrAPI.interestingPhotoURL
@@ -42,11 +42,11 @@ class PhotoStore {
             } else {
                 print("Unexpect error with the request")
             }*/
-            print("Response data:")
+            /*print("Response data:")
             if let httpResponse = response as? HTTPURLResponse {
                 print("\(httpResponse.statusCode)")
                 print("\(httpResponse.allHeaderFields)")
-            }
+            }*/
             let result = self.processPhotosRequest(data: data, error: error)
             OperationQueue.main.addOperation {
                 completion(result)

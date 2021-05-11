@@ -15,7 +15,7 @@ class RecentPhotosViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         // store.fetchInterestingPhotos()
-        store.fetchInterestingPhotos {
+        store.fetchPhotos (for: PhotoType.recentPhotos) {
             (photoResult) in
             
             // photos and error are contained in photoResult
@@ -26,7 +26,7 @@ class RecentPhotosViewController: UIViewController {
                  self.updateImageView(for: randomPhoto)
             
             case let .failure(error):
-                print("Error fetching interesting photos: \(error)")
+                print("Error fetching recent photos: \(error)")
             }
         }
         
