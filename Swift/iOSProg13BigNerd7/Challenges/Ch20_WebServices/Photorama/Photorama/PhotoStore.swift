@@ -13,12 +13,12 @@ class PhotoStore {
         return URLSession(configuration: config)
     }()
     
-    private func processPhotosRequest (data: Data?, error: Error?) ->
+    private func processPhotosRequest (for photoType: PhotoType, data: Data?, error: Error?) ->
     Result<[Photo], Error> {
         guard let jsonData = data else {
             return .failure(error!)
         }
-        return FlickrAPI.photos(fromJSON: jsonData)
+        return FlickrAPI.photos(of: photoType, fromJSON: jsonData)
     }
     
     func fetchPhotos (for type: PhotoType, completion: @escaping (Result<[Photo], Error>) -> Void) {
@@ -47,7 +47,7 @@ class PhotoStore {
                 print("\(httpResponse.statusCode)")
                 print("\(httpResponse.allHeaderFields)")
             }*/
-            let result = self.processPhotosRequest(data: data, error: error)
+            let result = self.processPhotosRequest(for: type, data: data, error: error)
             OperationQueue.main.addOperation {
                 completion(result)
             }

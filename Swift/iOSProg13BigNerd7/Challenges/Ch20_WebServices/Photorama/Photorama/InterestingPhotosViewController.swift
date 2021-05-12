@@ -12,8 +12,8 @@ class InterestingPhotosViewController: UIViewController {
     @IBOutlet private var imageView: UIImageView!
     var store: PhotoStore!
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         // Do any additional setup after loading the view.
         // store.fetchInterestingPhotos()
         store.fetchPhotos (for: PhotoType.interestingPhotos) {
@@ -22,10 +22,18 @@ class InterestingPhotosViewController: UIViewController {
             // photos and error are contained in photoResult
             switch photoResult {
             case let .success(photos):
-                print("Successfully found \(photos.count) photos")
-                 let randomPhoto = photos[Int.random(in: (0..<photos.count))]
-                 self.updateImageView(for: randomPhoto)
-            
+                if photos.count == 0 {
+                    //let scale2x = UITraitCollection(displayScale: 2.0)
+                    let defaultImage = UIImage(named: "Octonauts.jpg")
+                    if let defaultPhoto = defaultImage {
+                        //defaultPhoto.imageAsset?.register(UIImage(named: "Octonauts@2x.jpg")!, with: scale2x)
+                        self.updateImageView(for: defaultPhoto)
+                    }
+                } else {
+                    print("Successfully found \(photos.count) interesting photos")
+                    let randomPhoto = photos[Int.random(in: (0..<photos.count))]
+                    self.updateImageView(for: randomPhoto)
+                }
             case let .failure(error):
                 print("Error fetching interesting photos: \(error)")
             }
@@ -44,6 +52,9 @@ class InterestingPhotosViewController: UIViewController {
                 print("Error downloading image: \(error)")
             }
         }
+    }
+    func updateImageView (for image: UIImage) {
+        self.imageView.image = image
     }
 }
 

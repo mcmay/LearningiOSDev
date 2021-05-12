@@ -11,8 +11,8 @@ class RecentPhotosViewController: UIViewController {
     @IBOutlet private var imageView: UIImageView!
     var store: PhotoStore!
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         // Do any additional setup after loading the view.
         // store.fetchInterestingPhotos()
         store.fetchPhotos (for: PhotoType.recentPhotos) {
@@ -21,10 +21,16 @@ class RecentPhotosViewController: UIViewController {
             // photos and error are contained in photoResult
             switch photoResult {
             case let .success(photos):
-                print("Successfully found \(photos.count) photos")
-                 let randomPhoto = photos[Int.random(in: (0..<photos.count))]
-                 self.updateImageView(for: randomPhoto)
-            
+                if photos.count == 0 {
+                    let defaultImage = UIImage(named: "Captain.jpg")
+                    if let defaultPhoto = defaultImage {
+                        self.updateImageView(for: defaultPhoto)
+                    }
+                } else {
+                    print("Successfully found \(photos.count) recent photos")
+                    let randomPhoto = photos[Int.random(in: (0..<photos.count))]
+                    self.updateImageView(for: randomPhoto)
+                }
             case let .failure(error):
                 print("Error fetching recent photos: \(error)")
             }
@@ -43,5 +49,8 @@ class RecentPhotosViewController: UIViewController {
                 print("Error downloading image: \(error)")
             }
         }
+    }
+    func updateImageView(for image: UIImage) -> Void {
+        self.imageView.image = image
     }
 }

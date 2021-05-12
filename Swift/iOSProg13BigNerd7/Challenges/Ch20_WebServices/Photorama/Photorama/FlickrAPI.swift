@@ -19,8 +19,11 @@ enum EndPoint: String {
 struct FlickrAPI {
     private static let baseURLString = "https://api.flickr.com/services/rest"
     private static let apiKey = "a6d819499131071f158fd740860a5a88"
-    
+    //Key: 058aca4e9b43c1a2d3d8108362b296c1
+    // Secret: 73d18955848825e6
     // assemble url from baseURLString and query items
+    static var photoType: PhotoType = .interestingPhotos
+    
     private static func flickrURL (endPoint: EndPoint, parameters: [String: String]?) -> URL {
         var components = URLComponents(string: baseURLString)!
         var queryItems = [URLQueryItem]()
@@ -53,7 +56,7 @@ struct FlickrAPI {
         return flickrURL(endPoint: .recentPhotos,
                          parameters: ["extras": "url_z,date_taken"])
     }
-    static func photos (fromJSON data: Data) -> Result<[Photo], Error> {
+    static func photos (of type: PhotoType, fromJSON data: Data) -> Result<[Photo], Error> {
         do {
             let decoder = JSONDecoder()
             /*
@@ -65,16 +68,21 @@ struct FlickrAPI {
             dateFormatter.locale = Locale(identifier: "en_US_POSIX")
             dateFormatter.timeZone = TimeZone(secondsFromGMT: 0)
             decoder.dateDecodingStrategy = .formatted(dateFormatter)*/
-            let flickrResponse = try decoder.decode(FlickrResponse.self, from: data)
-    
-            return .success(flickrResponse.photoInfo.photo)
+            
+            if type == .interestingPhotos {
+               let flickrResponse = try decoder.decode(FlickrResponseForInteresting.self, from: data)
+                return .success(flickrResponse.photoInfo.photo)
+            } else {
+               let flickrResponse = try decoder.decode(FlickrResponseForRecent.self, from: data)
+                return .success(flickrResponse.photoInfo.photo)
+            }
         } catch {
             return .failure(error)
         }
     }
 }
 
-struct FlickrResponse: Codable {
+struct FlickrResponseForInteresting: Codable {
     //let photos: FlickrPhotosResponse
     let extra: Extra
     let stat: String
@@ -82,6 +90,16 @@ struct FlickrResponse: Codable {
     
     enum CodingKeys: String, CodingKey {
         case stat, extra
+        case photoInfo = "photos"
+    }
+}
+
+struct FlickrResponseForRecent: Codable {
+    let stat: String
+    let photoInfo: FlickrPhotosResponse
+    
+    enum CodingKeys: String, CodingKey {
+        case stat
         case photoInfo = "photos"
     }
 }
