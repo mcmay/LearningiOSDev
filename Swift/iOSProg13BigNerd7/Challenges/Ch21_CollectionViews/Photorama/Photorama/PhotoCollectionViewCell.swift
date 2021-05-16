@@ -17,7 +17,7 @@ class photoCollectionViewCell: UICollectionViewCell {
             imageView.image = imageToDisplay
         } else {
             spinner.startAnimating()
-            imageView.image = nil
+            imageView.image = UIImage(named: "Captain")
         }
     }
 }

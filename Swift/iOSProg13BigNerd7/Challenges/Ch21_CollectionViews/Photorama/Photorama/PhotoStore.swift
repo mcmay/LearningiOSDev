@@ -38,7 +38,8 @@ class PhotoStore {
             }*/
             let result = self.processPhotosRequest(data: data, error: error)
             OperationQueue.main.addOperation {
-                completion(result)
+                completion(result) // Find the implementation of this completion method in
+                // PhotosViewController.swift
             }
         }
         task.resume()
@@ -48,9 +49,10 @@ class PhotoStore {
             completion(.failure(PhotoError.missingImageURL))
             return
         }*/
+        // image caching to smooth up loading of images in collection view cells
         let photoKey = photo.id
         if let image = imageStore.image(forKey: photoKey) {
-            OperationQueue.main.addOperation {
+            OperationQueue.main.addOperation { // This completion task must run on main thread
                 completion(.success(image))
             }
             return

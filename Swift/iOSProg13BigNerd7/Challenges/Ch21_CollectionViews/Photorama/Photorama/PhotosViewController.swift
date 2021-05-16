@@ -4,6 +4,10 @@
 //
 //  Created by Chao Mei on 24/4/21.
 //
+// “Silver Challenge: Updated Item Sizes
+//Have the collection view always display four items per row, taking up as much of the screen width as possible. This should work in both portrait and landscape orientations. Consider making adjustments to the flow layout in the viewDidLayoutSubviews() method.”
+
+//Excerpt From: Aaron Hillegass. “iOS Programming: The Big Nerd Ranch Guide, 7th Edition.” Apple Books.
 
 import UIKit
 
@@ -32,10 +36,10 @@ class PhotosViewController: UIViewController, UICollectionViewDelegate {
                 print("Error fetching interesting photos: \(error)")
                 self.photoDataSource.photos.removeAll()
             }
-            self.collectionView.reloadSections(IndexSet(integer: 0))
-            if let layout = self.collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
+            /*if let layout = self.collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
                 layout.scrollDirection = .horizontal
-            }
+            }*/
+            self.collectionView.reloadSections(IndexSet(integer: 0))
         }
     }
     func collectionView (_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {

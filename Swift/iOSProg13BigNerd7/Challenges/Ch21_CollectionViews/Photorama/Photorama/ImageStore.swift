@@ -14,7 +14,7 @@ class ImageStore {
         cache.setObject(image, forKey: key as NSString)
         
         // Create full URL for image
-        let url = imageURL(forKey: key)
+        let url = imageURL(forKey: key) //ToREAD
         
         // Turn image into JPEG data
         if let data = image.jpegData(compressionQuality: 0.5) {
