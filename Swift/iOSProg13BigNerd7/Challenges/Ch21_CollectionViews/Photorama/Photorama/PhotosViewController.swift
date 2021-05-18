@@ -11,11 +11,13 @@
 
 import UIKit
 
-class PhotosViewController: UIViewController, UICollectionViewDelegate {
+class PhotosViewController: UIViewController, UICollectionViewDelegate
+                            {
     @IBOutlet var collectionView: UICollectionView!
     
     var store: PhotoStore!
     let photoDataSource = PhotoDataSource()
+    private let itemsPerRow = 4
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -86,6 +88,18 @@ class PhotosViewController: UIViewController, UICollectionViewDelegate {
         default:
             preconditionFailure("Unexpected segue identifier")
         }
+    }
+    override func viewDidLayoutSubviews() {
+        let flowLayout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout
+        flowLayout?.minimumLineSpacing = 1
+        let lineSpacing = flowLayout?.minimumLineSpacing ?? 1
+        flowLayout?.minimumInteritemSpacing = lineSpacing
+        let interItemSpace = flowLayout?.minimumInteritemSpacing ?? 1
+        let interItemSpacing = Int(interItemSpace)
+        let frameWidth = Int(collectionView.frame.width)
+        let availableWidth = frameWidth - (interItemSpacing * 3)
+        let itemWidth = availableWidth / itemsPerRow
+        flowLayout?.itemSize = CGSize(width: itemWidth, height: itemWidth)
     }
 }
 
