@@ -17,7 +17,7 @@ class PhotosViewController: UIViewController, UICollectionViewDelegate
     
     var store: PhotoStore!
     let photoDataSource = PhotoDataSource()
-    private let itemsPerRow = 4
+    private let itemsPerRow: CGFloat = 5
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -90,16 +90,18 @@ class PhotosViewController: UIViewController, UICollectionViewDelegate
         }
     }
     override func viewDidLayoutSubviews() {
-        let flowLayout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout
-        flowLayout?.minimumLineSpacing = 1
-        let lineSpacing = flowLayout?.minimumLineSpacing ?? 1
-        flowLayout?.minimumInteritemSpacing = lineSpacing
-        let interItemSpace = flowLayout?.minimumInteritemSpacing ?? 1
-        let interItemSpacing = Int(interItemSpace)
-        let frameWidth = Int(collectionView.frame.width)
-        let availableWidth = frameWidth - (interItemSpacing * 3)
-        let itemWidth = availableWidth / itemsPerRow
-        flowLayout?.itemSize = CGSize(width: itemWidth, height: itemWidth)
+        // Need to first construct a UICollectionViewFlowLayout and then this flow object
+        // can be configured and assigned to the collectionViewLayout property of the collectionView
+        let flowLayout = UICollectionViewFlowLayout()
+        flowLayout.minimumLineSpacing = 1
+        let lineSpacing = flowLayout.minimumLineSpacing
+        flowLayout.minimumInteritemSpacing = lineSpacing
+        let interItemSpace = flowLayout.minimumInteritemSpacing
+        let frameWidth = collectionView.frame.width
+        let availableWidth = frameWidth - interItemSpace * (itemsPerRow - 1)
+        let widthPerItem = availableWidth / itemsPerRow
+        flowLayout.itemSize = CGSize(width: widthPerItem, height: widthPerItem)
+        collectionView.collectionViewLayout = flowLayout
     }
 }
 
