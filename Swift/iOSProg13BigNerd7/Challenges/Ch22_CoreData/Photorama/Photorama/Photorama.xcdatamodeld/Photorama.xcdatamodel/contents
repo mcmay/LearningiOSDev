@@ -2,7 +2,7 @@
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="18154" systemVersion="20D91" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="Photo" representedClassName="Photo" syncable="YES">
         <attribute name="datetaken" optional="YES" attributeType="String"/>
-        <attribute name="datetakengranularity" optional="YES" attributeType="String"/>
+        <attribute name="datetakengranularity" optional="YES" attributeType="Transformable"/>
         <attribute name="datetakenunknow" optional="YES" attributeType="String"/>
         <attribute name="farm" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="heightZ" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>

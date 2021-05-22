@@ -19,10 +19,10 @@ class PhotosViewController: UIViewController, UICollectionViewDelegate {
         // store.fetchInterestingPhotos()
         collectionView.dataSource = photoDataSource
         collectionView.delegate = self
-        store.fetchInterestingPhotos {
+        store.fetchRecentPhotos {
             (photoResult) in
             
-            switch photoResult {
+            /*switch photoResult {
             case let .success(photos):
                 print("Successfully found \(photos.count) photos")
                  /*let randomPhoto = photos[Int.random(in: (0..<photos.count))]
@@ -35,7 +35,21 @@ class PhotosViewController: UIViewController, UICollectionViewDelegate {
             self.collectionView.reloadSections(IndexSet(integer: 0))
             if let layout = self.collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
                 layout.scrollDirection = .horizontal
+            }*/
+            self.updateDataSource()
+        }
+    }
+    private func updateDataSource () {
+        store.fetchAllPhotos {
+            (photoResult) in
+            
+            switch photoResult {
+            case let .success(photos):
+                self.photoDataSource.photos = photos
+            case .failure:
+                self.photoDataSource.photos.removeAll()
             }
+            self.collectionView.reloadSections(IndexSet(integer: 0))
         }
     }
     func collectionView (_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
