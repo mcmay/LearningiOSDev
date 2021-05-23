@@ -11,7 +11,7 @@ class PhotoInfoViewController: UIViewController {
     
     @IBOutlet var imageView: UIImageView!
     
-    var photo: FlickrPhoto! {
+    var photo: Photo! {
         didSet {
             navigationItem.title = photo.title
         }

@@ -2,7 +2,7 @@
 //  Photo+CoreDataProperties.swift
 //  Photorama
 //
-//  Created by Chao Mei on 20/5/21.
+//  Created by Chao Mei on 23/5/21.
 //
 //
 
@@ -17,20 +17,20 @@ extension Photo {
     }
 
     @NSManaged public var datetaken: String?
-    @NSManaged public var datetakengranularity: String?
+    @NSManaged public var datetakengranularity: NSObject?
     @NSManaged public var datetakenunknow: String?
-    @NSManaged public var farm: Int64
-    @NSManaged public var heightZ: Int64
-    @NSManaged public var id: String?
-    @NSManaged public var isfamily: Int64
-    @NSManaged public var isfriend: Int64
-    @NSManaged public var ispublic: Int64
+    @NSManaged public var farm: Int32
+    @NSManaged public var heightZ: Int32
+    @NSManaged public var photoID: String?
+    @NSManaged public var isfamily: Int32
+    @NSManaged public var isfriend: Int32
+    @NSManaged public var ispublic: Int32
     @NSManaged public var owner: String?
     @NSManaged public var secret: String?
     @NSManaged public var server: String?
     @NSManaged public var title: String?
     @NSManaged public var urlZ: String?
-    @NSManaged public var widthZ: Int64
+    @NSManaged public var widthZ: Int32
 
 }
 

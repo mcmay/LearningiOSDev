@@ -29,7 +29,7 @@ import Foundation
 }*/
 // MARK: - Photo
 struct FlickrPhoto: Codable {
-    let id, owner, secret, server: String
+    let photoID, owner, secret, server: String
     let farm: Int
     let title: String
     let ispublic, isfriend, isfamily: Int
@@ -40,7 +40,8 @@ struct FlickrPhoto: Codable {
     let heightZ, widthZ: Int?
 
     enum CodingKeys: String, CodingKey {
-        case id, owner, secret, server, farm, title, ispublic, isfriend, isfamily, datetaken, datetakengranularity, datetakenunknown
+        case owner, secret, server, farm, title, ispublic, isfriend, isfamily, datetaken, datetakengranularity, datetakenunknown
+        case photoID = "id"
         case urlZ = "url_z"
         case heightZ = "height_z"
         case widthZ = "width_z"
@@ -77,6 +78,6 @@ enum Datetakengranularity: Codable {
 extension FlickrPhoto: Equatable {
     static func == (lhs: FlickrPhoto, rhs: FlickrPhoto) -> Bool {
         // Two Photos are the same if they have the same photoID
-        return lhs.id == rhs.id
+        return lhs.photoID == rhs.photoID
     }
 }

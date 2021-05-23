@@ -33,36 +33,32 @@ class PhotoStore {
         
         switch FlickrAPI.photos(fromJSON: jsonData) {
         case let .success(flickrPhotos):
-            let photos = flickrPhotos.map { flickrPhoto -> Photo in
+            let _ = flickrPhotos.map { flickrPhoto -> Photo in
                 let fetchRequest: NSFetchRequest<Photo> = Photo.fetchRequest()
-                let predicate = NSPredicate(format: "\(#keyPath(Photo.id)) == \(flickrPhoto.id)")
+                let predicate = NSPredicate(format: "\(#keyPath(Photo.photoID)) == \(flickrPhoto.photoID)")
                 fetchRequest.predicate = predicate
                 var photo: Photo!
                 context.performAndWait {
-                    do {
                         photo = Photo(context: context)
-                        photo.id = flickrPhoto.id
+                        photo.photoID = flickrPhoto.photoID
                         photo.owner = flickrPhoto.owner
                         photo.secret = flickrPhoto.secret
                         photo.server = flickrPhoto.server
-                        photo.farm = Int64(flickrPhoto.farm)
+                        photo.farm = Int32(flickrPhoto.farm)
                         photo.title = flickrPhoto.title
-                        photo.ispublic = Int64(flickrPhoto.ispublic)
-                        photo.isfriend = Int64(flickrPhoto.isfriend)
-                        photo.isfamily = Int64(flickrPhoto.isfamily)
+                        photo.ispublic = Int32(flickrPhoto.ispublic)
+                        photo.isfriend = Int32(flickrPhoto.isfriend)
+                        photo.isfamily = Int32(flickrPhoto.isfamily)
                         photo.datetaken = flickrPhoto.datetaken
-                        photo.datetakengranularity = try String(from: flickrPhoto.datetakengranularity as! Decoder)
+                        photo.datetakengranularity = flickrPhoto.datetakengranularity
                         photo.datetakenunknow = flickrPhoto.datetakenunknown
                         photo.urlZ = flickrPhoto.urlZ
-                        photo.heightZ = Int64(flickrPhoto.heightZ!)
-                        photo.widthZ = Int64(flickrPhoto.widthZ!)
-                    } catch {
-                        print("error encountered")
-                    }
+                        photo.heightZ = Int32(flickrPhoto.heightZ!)
+                        photo.widthZ = Int32(flickrPhoto.widthZ!)
                 }
                 return photo
             }
-            return .success(photos)
+            return .success(flickrPhotos)
         case let .failure(error):
             return .failure(error)
         }
@@ -101,10 +97,10 @@ class PhotoStore {
         }
         task.resume()
     }
-    func fetchImage (for photo: FlickrPhoto, completion: @escaping (Result<UIImage, Error>) -> Void) {
+    func fetchImage (for photo: Photo, completion: @escaping (Result<UIImage, Error>) -> Void) {
         
-        let photoKey = photo.id
-        if let image = imageStore.image(forKey: photoKey) {
+        let photoKey = photo.photoID
+        if let image = imageStore.image(forKey: photoKey!) {
             OperationQueue.main.addOperation {
                 completion(.success(image))
             }
@@ -120,7 +116,7 @@ class PhotoStore {
             (data, response, error) in
             let result = self.processImageRequest(data: data, error: error)
             if case let .success(image) = result {
-                self.imageStore.setImage(image, forKey: photoKey)
+                self.imageStore.setImage(image, forKey: photoKey!)
             }
             OperationQueue.main.addOperation {
                 completion(result)
