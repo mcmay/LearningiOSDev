@@ -23,59 +23,6 @@ class PhotoStore {
         }
         return container
     }()
-    private func processPhotosRequest (data: Data?, error: Error?) ->
-    Result<[Photo], Error> {
-        guard let jsonData = data else {
-            return .failure(error!)
-        }
-        //return FlickrAPI.photos(fromJSON: jsonData)
-        let context = persistenContainer.viewContext
-        
-        switch FlickrAPI.photos(fromJSON: jsonData) {
-        case let .success(flickrPhotos):
-            let photos = flickrPhotos.map { flickrPhoto -> Photo in
-                let fetchRequest: NSFetchRequest<Photo> = Photo.fetchRequest()
-                let predicate = NSPredicate(format: "\(#keyPath(Photo.photoID)) == \(flickrPhoto.photoID)")
-                fetchRequest.predicate = predicate
-                var photo: Photo!
-                context.performAndWait {
-                        photo = Photo(context: context)
-                        photo.photoID = flickrPhoto.photoID
-                        photo.title = flickrPhoto.title
-                        photo.datetaken = flickrPhoto.datetaken
-                        photo.urlZ = flickrPhoto.urlZ
-                    if let photoHeight = flickrPhoto.heightZ {
-                        photo.heightZ = Int32(photoHeight)
-                    } else {
-                        photo.heightZ = 20
-                    }
-                    if let photoWidth = flickrPhoto.widthZ {
-                        photo.heightZ = Int32(photoWidth)
-                    } else {
-                        photo.widthZ = 20
-                    }
-                }
-                return photo
-            }
-            return .success(photos)
-        case let .failure(error):
-            return .failure(error)
-        }
-    }
-    func fetchAllPhotos (completion: @escaping (Result<[Photo], Error>) -> Void) -> Void {
-        let fetchRequest: NSFetchRequest<Photo> = Photo.fetchRequest()
-        let sortByDataTaken = NSSortDescriptor(key: #keyPath(Photo.datetaken), ascending: true)
-        fetchRequest.sortDescriptors = [sortByDataTaken]
-        let viewContext = persistenContainer.viewContext
-        viewContext.perform {
-            do {
-                let allPhotos = try viewContext.fetch(fetchRequest)
-                completion(.success(allPhotos))
-            } catch {
-                completion(.failure(error))
-            }
-        }
-    }
     func fetchRecentPhotos (completion: @escaping (Result<[Photo], Error>) -> Void) {
         let url = FlickrAPI.recentPhotoURL
         let request = URLRequest(url: url)
@@ -98,6 +45,80 @@ class PhotoStore {
         }
         task.resume()
     }
+    private func processPhotosRequest (data: Data?, error: Error?) ->
+    Result<[Photo], Error> {
+        guard let jsonData = data else {
+            return .failure(error!)
+        }
+        
+        let context = persistenContainer.viewContext
+        
+        switch FlickrAPI.photos(fromJSON: jsonData) {
+        case let .success(flickrPhotos): // .success(flickrPhotos) are returned from FlickrAPI.photos(fromJSON:)
+            let photos = flickrPhotos.map { flickrPhoto -> Photo in
+                let fetchRequest: NSFetchRequest<Photo> = Photo.fetchRequest()
+                let predicate = NSPredicate(format: "\(#keyPath(Photo.photoID)) == \(flickrPhoto.photoID)")
+                fetchRequest.predicate = predicate
+                var fetchedPotos: [Photo]?
+                context.performAndWait {
+                    fetchedPotos = try? fetchRequest.execute()
+                }
+                if let existingPhoto = fetchedPotos?.first {
+                    return existingPhoto
+                }
+                var photo: Photo!
+                context.performAndWait {
+                    photo = Photo(context: context)
+                    photo.photoID = flickrPhoto.photoID
+                    photo.title = flickrPhoto.title
+                    photo.datetaken = flickrPhoto.datetaken
+                    photo.urlZ = flickrPhoto.urlZ
+                    if let photoHeight = flickrPhoto.heightZ {
+                            photo.heightZ = Int32(photoHeight)
+                    } else {
+                        photo.heightZ = 20
+                    }
+                    if let photoWidth = flickrPhoto.widthZ {
+                        photo.heightZ = Int32(photoWidth)
+                    } else {
+                        photo.widthZ = 20
+                    }
+                }
+                return photo
+            }
+            /*var photoIDs = [String]()
+            photos.forEach{photo in photoIDs.append(photo.photoID!)}
+            let idSet = Set(photoIDs)
+            let uniqueIDs = Array(idSet)
+            var uniquePhotos = [Photo]()
+            uniqueIDs.forEach{ id in
+                for photo in photos {
+                    if photo.photoID == id {
+                        uniquePhotos.append(photo)
+                    }
+                }
+            }
+            return .success(uniquePhotos)*/
+            return .success(photos)
+        case let .failure(error):
+            return .failure(error)
+        }
+    }
+    func fetchAllPhotosFromDisk (completion: @escaping (Result<[Photo], Error>) -> Void) -> Void {
+        let fetchRequest: NSFetchRequest<Photo> = Photo.fetchRequest()
+        let sortByDataTaken = NSSortDescriptor(key: #keyPath(Photo.datetaken), ascending: false)
+        fetchRequest.sortDescriptors = [sortByDataTaken]
+        let viewContext = persistenContainer.viewContext
+        viewContext.perform {
+            do {
+                let allPhotos = try viewContext.fetch(fetchRequest)
+                completion(.success(allPhotos))
+            } catch {
+                completion(.failure(error))
+            }
+        }
+    }
+    
     func fetchImage (for photo: Photo, completion: @escaping (Result<UIImage, Error>) -> Void) {
         
         let photoKey = photo.photoID

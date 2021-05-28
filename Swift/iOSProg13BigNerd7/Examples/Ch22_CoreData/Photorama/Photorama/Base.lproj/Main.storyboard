@@ -41,19 +41,37 @@
                                                     <rect key="frame" x="35" y="35" width="20" height="20"/>
                                                     <color key="color" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                 </activityIndicatorView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HVK-fQ-ZXn">
+                                                    <rect key="frame" x="0.0" y="0.0" width="31" height="14.5"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="myf-iI-lxh">
+                                                    <rect key="frame" x="29.5" y="75.5" width="31" height="14.5"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                    <color key="textColor" systemColor="systemPinkColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstAttribute="bottom" secondItem="n2w-6U-ykL" secondAttribute="bottom" id="Eva-uR-XLp"/>
+                                                <constraint firstItem="myf-iI-lxh" firstAttribute="centerX" secondItem="h9g-1t-1GW" secondAttribute="centerX" id="Phe-6R-nXl"/>
                                                 <constraint firstAttribute="trailing" secondItem="n2w-6U-ykL" secondAttribute="trailing" id="bxi-ih-LkY"/>
+                                                <constraint firstAttribute="bottom" secondItem="myf-iI-lxh" secondAttribute="bottom" id="cI2-mc-r5o"/>
+                                                <constraint firstItem="HVK-fQ-ZXn" firstAttribute="leading" secondItem="h9g-1t-1GW" secondAttribute="leading" id="e8e-P6-KaP"/>
                                                 <constraint firstItem="AC9-gm-SB7" firstAttribute="centerX" secondItem="h9g-1t-1GW" secondAttribute="centerX" id="hVY-5o-AgN"/>
                                                 <constraint firstItem="n2w-6U-ykL" firstAttribute="leading" secondItem="h9g-1t-1GW" secondAttribute="leading" id="iMk-Qa-ieZ"/>
                                                 <constraint firstItem="n2w-6U-ykL" firstAttribute="top" secondItem="h9g-1t-1GW" secondAttribute="top" id="mVC-eb-ag5"/>
+                                                <constraint firstItem="HVK-fQ-ZXn" firstAttribute="top" secondItem="h9g-1t-1GW" secondAttribute="top" id="mhE-Sc-2zr"/>
                                                 <constraint firstItem="AC9-gm-SB7" firstAttribute="centerY" secondItem="h9g-1t-1GW" secondAttribute="centerY" id="zaO-xc-18J"/>
                                             </constraints>
                                         </collectionViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <connections>
                                             <outlet property="imageView" destination="n2w-6U-ykL" id="PUx-8w-RZa"/>
+                                            <outlet property="photoID" destination="myf-iI-lxh" id="ebN-XT-QBG"/>
+                                            <outlet property="photoTimestamp" destination="HVK-fQ-ZXn" id="nD7-Ah-trn"/>
                                             <outlet property="spinner" destination="AC9-gm-SB7" id="zr6-NS-oPt"/>
                                             <segue destination="ez4-r9-XUL" kind="show" identifier="showPhoto" id="TLw-Pu-q1N"/>
                                         </connections>
@@ -131,6 +149,9 @@
     <resources>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemPinkColor">
+            <color red="1" green="0.17647058823529413" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

@@ -39,7 +39,7 @@ class PhotosViewController: UIViewController, UICollectionViewDelegate {
         }
     }
     private func updateDataSource () {
-        store.fetchAllPhotos {
+        store.fetchAllPhotosFromDisk {
             (photoResult) in
             
             switch photoResult {
@@ -67,6 +67,8 @@ class PhotosViewController: UIViewController, UICollectionViewDelegate {
             
             // When the request finishes, find the current cell for this photo
             if let cell = self.collectionView.cellForItem(at: photoIndexPath) as? photoCollectionViewCell {
+                cell.photoTimestamp.text = photo.datetaken
+                cell.photoID.text = photo.photoID
                 cell.update(displaying: image)
             }
         }
