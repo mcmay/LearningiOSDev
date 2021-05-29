@@ -12,6 +12,7 @@ class photoCollectionViewCell: UICollectionViewCell {
     @IBOutlet var spinner: UIActivityIndicatorView!
     @IBOutlet var photoTimestamp: UILabel!
     @IBOutlet var photoID: UILabel!
+    
     func update (displaying image: UIImage?) -> Void {
         if let imageToDisplay = image {
             spinner.stopAnimating()

@@ -12,6 +12,7 @@ class PhotosViewController: UIViewController, UICollectionViewDelegate {
     
     var store: PhotoStore!
     let photoDataSource = PhotoDataSource()
+    var cell: photoCollectionViewCell!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -70,7 +71,9 @@ class PhotosViewController: UIViewController, UICollectionViewDelegate {
                 cell.photoTimestamp.text = photo.datetaken
                 cell.photoID.text = photo.photoID
                 cell.update(displaying: image)
+                self.cell = cell
             }
+            
         }
     }
     /*func updateImageView (for photo: Photo) -> Void {

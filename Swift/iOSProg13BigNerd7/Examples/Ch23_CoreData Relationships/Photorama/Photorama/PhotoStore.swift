@@ -53,6 +53,7 @@ class PhotoStore {
         }
         task.resume()
     }
+    
     private func processPhotosRequest (data: Data?, error: Error?,
                                        completion: @escaping (Result<[Photo], Error>) -> Void) {
         guard let jsonData = data else {

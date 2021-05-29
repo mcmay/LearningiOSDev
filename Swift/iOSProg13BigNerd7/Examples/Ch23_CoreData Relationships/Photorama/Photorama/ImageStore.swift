@@ -15,7 +15,7 @@ class ImageStore {
         
         // Create full URL for image
         let url = imageURL(forKey: key)
-        
+
         // Turn image into JPEG data
         if let data = image.jpegData(compressionQuality: 0.5) {
             // Write it to full URL
