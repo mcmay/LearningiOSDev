@@ -64,7 +64,8 @@ class PhotoStore {
         }
         task.resume()
     }
-    //var counter = 0
+    //var existing = [Photo]()
+    //var update   = [Photo]()
     private func processPhotosRequest (data: Data?, error: Error?,
                                        completion: @escaping (Result<[Photo], Error>) -> Void) {
         guard let jsonData = data else {
@@ -79,6 +80,10 @@ class PhotoStore {
             switch FlickrAPI.photos(fromJSON: jsonData) {
             case let .success(flickrPhotos): // .success(flickrPhotos) are returned from FlickrAPI.photos(fromJSON:)
                 //print(#function, "flickrPhotos: \(flickrPhotos.count)") // 100 2021-5-30
+                // fetch photos stored on disk (Photo)
+                // and convert flickr photos (FlickrPhoto) fetched from the net
+                // to photos stored on the distk whose photoID is identical to flickr photo
+                // to avoid downloading identical images again
                 let photos = flickrPhotos.map { flickrPhoto -> Photo in
                     let fetchRequest: NSFetchRequest<Photo> = Photo.fetchRequest()
                     let predicate = NSPredicate(format: "(\(#keyPath(Photo.photoID)) == \(flickrPhoto.photoID)) AND (NOT \(#keyPath(Photo.title)) BEGINSWITH 'D-2021')")
@@ -89,8 +94,7 @@ class PhotoStore {
                         //print(#function, "fetchedPhotos: \(fetchedPotos?.count ?? 0)") // 0 or 1 2021-5-30
                     }
                     if let existingPhoto = fetchedPotos?.first {
-                        //print(#function, "counter: \(self.counter)")
-                        //self.counter += 1 // 52 2021-5-30
+                        //self.existing.append(existingPhoto)
                         return existingPhoto
                     }
                     var photo: Photo!
@@ -111,6 +115,7 @@ class PhotoStore {
                             photo.widthZ = 90
                         }
                     }
+                    //self.update.append(photo)
                     return photo
                 }
                 do {
@@ -120,6 +125,8 @@ class PhotoStore {
                     completion(.failure(error))
                     return
                 }
+                //self.update.append(contentsOf: self.existing)
+                //let photos = self.update
                 let photoIDs = photos.map { $0.objectID }
                 let viewContext = self.persistentContainer.viewContext
                 let viewContextPhotos = photoIDs.map {viewContext.object(with: $0) } as! [Photo]

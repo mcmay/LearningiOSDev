@@ -379,8 +379,8 @@
         <segue reference="y3E-ov-t46"/>
     </inferredMetricsTieBreakers>
     <resources>
-        <image name="Circle-icons-camera" width="16" height="16"/>
-        <image name="sfavorite" width="16" height="16"/>
+        <image name="Circle-icons-camera" width="32" height="32"/>
+        <image name="sfavorite" width="32" height="32"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

@@ -51,6 +51,7 @@ class TagsViewController: UITableViewController {
         super.viewDidLoad()
         tableView.dataSource = tagDataSource
         tagDataSource.photo = self.photo
+        tagDataSource.store = store
         updateTags()
     }
     private func updateTags () {
