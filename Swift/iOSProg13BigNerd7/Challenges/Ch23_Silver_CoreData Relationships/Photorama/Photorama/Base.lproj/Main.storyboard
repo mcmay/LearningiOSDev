@@ -88,7 +88,18 @@
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="Per-2b-W7i" secondAttribute="bottom" id="uru-Rc-hRB"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Photorama" id="BR0-ha-Lfw"/>
+                    <navigationItem key="navigationItem" title="Photorama" id="BR0-ha-Lfw">
+                        <barButtonItem key="leftBarButtonItem" title="Top" id="t6D-OR-Jnm">
+                            <connections>
+                                <action selector="goToTop:" destination="BYZ-38-t0r" id="VTA-Bh-U03"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Bottom" id="PGp-pf-v1o">
+                            <connections>
+                                <action selector="jumpToBottom:" destination="BYZ-38-t0r" id="p15-ni-6RA"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="collectionView" destination="Per-2b-W7i" id="d4l-lT-gaE"/>
                     </connections>
@@ -376,7 +387,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="y3E-ov-t46"/>
+        <segue reference="TLw-Pu-q1N"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="Circle-icons-camera" width="32" height="32"/>

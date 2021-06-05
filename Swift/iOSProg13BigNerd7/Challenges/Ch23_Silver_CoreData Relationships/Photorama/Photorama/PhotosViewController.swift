@@ -8,8 +8,18 @@
 import UIKit
 
 class PhotosViewController: UIViewController, UICollectionViewDelegate {
-    @IBOutlet var collectionView: UICollectionView!
     
+    @IBOutlet var collectionView: UICollectionView!
+    @IBAction func goToTop(_ sender: UIBarButtonItem) {
+        let firstItemIndex = IndexPath(item: 0, section: 0)
+        self.collectionView.scrollToItem(at: firstItemIndex, at: .bottom, animated: true)
+    }
+    
+    @IBAction func jumpToBottom(_ sender: UIBarButtonItem) {
+        let item = photoDataSource.collectionView(self.collectionView, numberOfItemsInSection:  0) - 1
+        let lastItemIndex = IndexPath(item: item, section: 0)
+        self.collectionView.scrollToItem(at: lastItemIndex, at: .top, animated: true)
+    }
     var store: PhotoStore!
     let photoDataSource = PhotoDataSource()
     var cell: PhotoCollectionViewCell!
