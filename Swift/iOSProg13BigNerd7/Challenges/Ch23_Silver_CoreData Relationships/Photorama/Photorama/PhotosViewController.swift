@@ -28,6 +28,13 @@ class PhotosViewController: UIViewController, UICollectionViewDelegate {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         // store.fetchInterestingPhotos()
+        self.collectionView.layer.borderWidth = 4
+        let teal = UIColor.systemTeal
+        let light = UITraitCollection(userInterfaceStyle: .light)
+        //let dark = UITraitCollection(userInterfaceStyle: .dark)
+        let tealLight = teal.resolvedColor(with: light)
+        //let tealdark = teal.resolvedColor(with: dark)
+        self.collectionView.layer.borderColor = tealLight.cgColor
         collectionView.dataSource = photoDataSource
         collectionView.delegate = self
         store.fetchRecentPhotos {

@@ -16,7 +16,13 @@ class FavoritePhotosViewController: UIViewController, UICollectionViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.collectionView.layer.borderWidth = 4
+        let teal = UIColor.systemTeal
+        //let light = UITraitCollection(userInterfaceStyle: .light)
+        let dark = UITraitCollection(userInterfaceStyle: .dark)
+        //let tealLight = teal.resolvedColor(with: light)
+        let tealDark = teal.resolvedColor(with: dark)
+        self.collectionView.layer.borderColor = tealDark.cgColor
         collectionView.dataSource = photoDataSource
         collectionView.delegate = self
         self.updateDataSource()
