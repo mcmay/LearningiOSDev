@@ -1,0 +1,35 @@
+{
+  "images" : [
+    {
+      "filename" : "Mars.jpg",
+      "idiom" : "universal",
+      "resizing" : {
+        "cap-insets" : {
+          "bottom" : 31,
+          "left" : 90,
+          "right" : 98,
+          "top" : 34
+        },
+        "center" : {
+          "height" : 4,
+          "mode" : "stretch",
+          "width" : 10
+        },
+        "mode" : "9-part"
+      },
+      "scale" : "1x"
+    },
+    {
+      "idiom" : "universal",
+      "scale" : "2x"
+    },
+    {
+      "idiom" : "universal",
+      "scale" : "3x"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}
