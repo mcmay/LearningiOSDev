@@ -9,7 +9,6 @@ import UIKit
 import CoreImage.CIFilterBuiltins
 
 class ViewController: UIViewController {
-    let myView: MyView = MyView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,7 +22,16 @@ class ViewController: UIViewController {
         //CGImageDrawing()
         //drawingCIImageGradient()
         //drawCIImageWithGradientUsingCIFiler()
-        drawBlurAndVibrancyImage()
+        //drawBlurAndVibrancyImage()
+        drawArrow()
+    }
+    func drawArrow () {
+        let x = view.center.x
+        let y = view.center.y
+        let width = CGFloat(200), height = CGFloat(200)
+        let rect = CGRect(x - width/2.0, y - height/2.0, width, height)
+        let myView = MyView(frame: rect)
+        self.view.addSubview(myView)
     }
     func drawBlurAndVibrancyImage () {
         showPic()
@@ -83,6 +91,7 @@ class ViewController: UIViewController {
         setImageView(UIImage(cgImage:outimage))
     }
     func drawing () {
+        let myView = UIView()
         myView.frame = CGRect(self.view.center.x - 50, self.view.center.y - 50, 100, 100)
         self.view.addSubview(myView)
         myView.draw(myView.frame)
@@ -191,39 +200,3 @@ class ViewController: UIViewController {
 }
 
 
-
-extension CGRect {
-    init(_ x:CGFloat, _ y:CGFloat, _ w:CGFloat, _ h:CGFloat) {
-        self.init(x:x, y:y, width:w, height:h)
-    }
-}
-extension CGRect {
-    var center : CGPoint {
-        return CGPoint(self.midX, self.midY)
-    }
-}
-extension CGRect {
-    func centeredRectOfSize(_ sz:CGSize) -> CGRect {
-        let c = self.center
-        let x = c.x - sz.width/2.0
-        let y = c.y - sz.height/2.0
-        
-        return CGRect(x, y, sz.width, sz.height)
-    }
-}
-extension CGSize {
-    init(_ width:CGFloat, _ height:CGFloat) {
-        self.init(width:width, height:height)
-    }
-}
-extension CGPoint {
-    init(_ x:CGFloat, _ y:CGFloat) {
-        self.init(x:x, y:y)
-    }
-}
-
-extension CGVector {
-    init (_ dx:CGFloat, _ dy:CGFloat) {
-        self.init(dx:dx, dy:dy)
-    }
-}
