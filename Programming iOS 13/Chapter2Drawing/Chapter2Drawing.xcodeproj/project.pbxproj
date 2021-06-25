@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		88750E472684905300D423CD /* AuthorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88750E462684905300D423CD /* AuthorView.swift */; };
 		888E60D4267D44FD005FCAA8 /* MyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 888E60D3267D44FD005FCAA8 /* MyView.swift */; };
 		888E60D6267D451E005FCAA8 /* MyVignetteFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 888E60D5267D451E005FCAA8 /* MyVignetteFilter.swift */; };
 		88A2BE43267D432D0091FB90 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88A2BE42267D432D0091FB90 /* AppDelegate.swift */; };
@@ -18,6 +19,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		88750E462684905300D423CD /* AuthorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorView.swift; sourceTree = "<group>"; };
 		888E60D3267D44FD005FCAA8 /* MyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyView.swift; sourceTree = "<group>"; };
 		888E60D5267D451E005FCAA8 /* MyVignetteFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyVignetteFilter.swift; sourceTree = "<group>"; };
 		88A2BE3F267D432D0091FB90 /* Chapter2Drawing.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Chapter2Drawing.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -69,6 +71,7 @@
 				88A2BE4B267D432E0091FB90 /* Assets.xcassets */,
 				88A2BE4D267D432E0091FB90 /* LaunchScreen.storyboard */,
 				88A2BE50267D432E0091FB90 /* Info.plist */,
+				88750E462684905300D423CD /* AuthorView.swift */,
 			);
 			path = Chapter2Drawing;
 			sourceTree = "<group>";
@@ -146,6 +149,7 @@
 				888E60D4267D44FD005FCAA8 /* MyView.swift in Sources */,
 				888E60D6267D451E005FCAA8 /* MyVignetteFilter.swift in Sources */,
 				88A2BE47267D432D0091FB90 /* ViewController.swift in Sources */,
+				88750E472684905300D423CD /* AuthorView.swift in Sources */,
 				88A2BE43267D432D0091FB90 /* AppDelegate.swift in Sources */,
 				88A2BE45267D432D0091FB90 /* SceneDelegate.swift in Sources */,
 			);
